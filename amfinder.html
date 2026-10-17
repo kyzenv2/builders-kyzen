@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMFinder - Alight Motion Preset</title>
+  
+  <link rel="icon" type="image/png" href="LINK_CATBOX_LOGO_LU_DISINI.png">
+  <meta name="theme-color" content="#000000">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Poppins', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white dark:bg-black dark:text-white transition-colors duration-300 antialiased selection:bg-white selection:text-black min-h-screen flex flex-col">
+
+  <!-- NAVBAR DENGAN TOMBOL BACK -->
+    <!-- NAVBAR -->
+    <!-- NAVBAR AMFINDER (Tombol Back di Kanan) -->
+  <header class="border-b border-white/5 bg-black/60 backdrop-blur-xl sticky top-0 z-50 animate-fade-in-up delay-100">
+    <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+      
+      <!-- KIRI: LOGO & NAMA APLIKASI -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#121212] border border-white/10 flex items-center justify-center overflow-hidden shadow-lg">
+          <img src="https://files.catbox.moe/col18n.png" alt="Logo AM" class="w-full h-full object-cover grayscale">
+        </div>
+        <div>
+          <span class="font-bold text-lg tracking-wider text-white">AM<span class="text-gray-400">Finder</span></span>
+          <span class="text-[10px] block text-gray-500 font-medium -mt-1">Alight Motion Preset</span>
+        </div>
+      </div>
+
+      <!-- KANAN: TOMBOL BACK KE PORTOFOLIO (PANAH KANAN) -->
+      <div class="flex items-center gap-2">
+        <a href="index.html" class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all duration-300" title="Kembali ke Portofolio">
+          <i class="fas fa-arrow-right text-lg"></i>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-8 md:py-12">
+    
+    <!-- HERO SECTION -->
+    <div class="text-center mb-8 animate-fade-in-up delay-200">
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-white">
+        Cari & Ekstrak Preset <br>
+        <span class="text-gray-400">Alight Motion TikTok</span>
+      </h1>
+      <p class="text-gray-500 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
+        Dapatkan link preset <span class="text-white font-medium">5MB</span>, file <span class="text-white font-medium">XML</span>, serta unduh video TikTok tanpa watermark secara otomatis.
+      </p>
+    </div>
+
+    <!-- TAB SWITCHER -->
+    <div class="flex justify-center mb-6 animate-fade-in-up delay-300">
+      <div class="inline-flex p-1.5 bg-[#121212] border border-white/10 rounded-2xl shadow-inner gap-1">
+        <button id="tabFind" onclick="switchTab('find')" class="tab-btn active px-5 py-2.5 rounded-xl font-medium text-xs md:text-sm flex items-center gap-2 transition-all duration-300">
+          <i class="fa-solid fa-link"></i>
+          <span>Ekstrak Link</span>
+        </button>
+        <button id="tabSearch" onclick="switchTab('search')" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-xs md:text-sm flex items-center gap-2 transition-all duration-300 text-gray-400 hover:text-white">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Cari Video</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- INPUT CARD -->
+    <div class="bg-[#121212] border border-white/10 rounded-3xl p-5 md:p-7 shadow-2xl backdrop-blur-xl mb-8 relative overflow-hidden animate-fade-in-up delay-400">
+      
+      <div id="formFindPanel">
+        <div class="relative mb-3 group">
+          <input type="url" id="inputUrl" placeholder="Tempelkan link TikTok (contoh: https://vt.tiktok.com/...)" class="w-full pl-4 pr-12 py-4 bg-black/50 border border-white/10 rounded-2xl text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-all placeholder:text-gray-600 text-white shadow-inner" />
+          <button onclick="pasteUrl()" type="button" title="Paste" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white p-2 rounded-xl transition">
+            <i class="fa-regular fa-paste text-lg"></i>
+          </button>
+        </div>
+        <button id="btnFind" onclick="handleFindPreset()" class="w-full bg-white text-black font-bold py-4 rounded-2xl hover:bg-gray-200 active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm md:text-base shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Ekstrak Preset Sekarang</span>
+        </button>
+      </div>
+
+      <div id="formSearchPanel" class="hidden">
+        <div class="relative mb-3 group">
+          <input type="text" id="inputQuery" placeholder="Ketik lagu atau keyword (contoh: jedag jedug)" class="w-full pl-4 pr-12 py-4 bg-black/50 border border-white/10 rounded-2xl text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-all placeholder:text-gray-600 text-white shadow-inner" />
+          <button onclick="clearQuery()" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white p-2 rounded-xl transition">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        <button id="btnSearch" onclick="handleSearchPreset()" class="w-full bg-white text-black font-bold py-4 rounded-2xl hover:bg-gray-200 active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm md:text-base shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Cari Video Preset</span>
+        </button>
+      </div>
+
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-2">
+        <span class="text-xs text-gray-500 font-medium">Tren:</span>
+        <button onclick="quickSearch('jedag jedug')" class="chip-btn">jedag jedug</button>
+        <button onclick="quickSearch('preset 5mb')" class="chip-btn">preset 5mb</button>
+        <button onclick="quickSearch('preset xml')" class="chip-btn">preset xml</button>
+        <button onclick="quickSearch('sound viral')" class="chip-btn">sound viral</button>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- STEP BY STEP (Muncul sebelum mencari) -->
+    <!-- ========================================== -->
+    <div id="stepByStep" class="animate-fade-in-up delay-500 mb-8 max-w-sm mx-auto">
+      <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-gray-500"></span> How it works
+      </h3>
+      
+      <div class="space-y-4 px-2">
+        <div class="flex gap-4 items-start">
+          <div class="w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 border border-white/20">1</div>
+          <p class="text-sm text-gray-300 leading-tight">Paste a TikTok or YouTube link</p>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 border border-white/20">2</div>
+          <p class="text-sm text-gray-300 leading-tight">AM Preset Finder scans the video, bio and comments</p>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 border border-white/20">3</div>
+          <p class="text-sm text-gray-300 leading-tight">Preset links are extracted automatically</p>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 border border-white/20">4</div>
+          <p class="text-sm text-gray-300 leading-tight">Copy the preset you need</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPINNER LOADING -->
+    <div id="loadingState" class="hidden py-12 flex-col items-center justify-center animate-fade-in-up">
+      <div class="relative w-16 h-16 mb-4">
+        <div class="w-16 h-16 border-4 border-white/10 border-t-white rounded-full animate-spin"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <i class="fa-solid fa-wand-magic-sparkles text-white text-lg"></i>
+        </div>
+      </div>
+      <p id="loadingText" class="text-sm font-semibold text-white">Menghubungkan ke Scraper Engine...</p>
+      <p class="text-xs text-gray-500 mt-1">Mengambil deskripsi, komentar, dan bio</p>
+    </div>
+
+    <!-- RESULT CONTAINER -->
+    <div id="resultFindContainer" class="hidden space-y-6"></div>
+    <div id="resultSearchContainer" class="hidden space-y-6"></div>
+
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-[#121212] border border-white/20 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm text-white">
+      <i id="toastIcon" class="fa-solid fa-circle-check text-green-400"></i>
+      <span id="toastMsg">Berhasil!</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 bg-black py-6 mt-12 text-center text-xs text-gray-500">
+    <div class="max-w-4xl mx-auto px-4">
+      <p>© 2026 AMFinder. Developed by J-k!zenorv.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

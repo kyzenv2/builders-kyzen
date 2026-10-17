@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #a1a1aa;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.banner {
+  height: 200px;
+  background-image: url('https://files.catbox.moe/f23cyt.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.social-icon {
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+
+.badge,
+.shiny-badge {
+  border-radius: 9999px;
+  padding: 3px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ========================================== */
+/* EFEK KACA (GLASSMORPHISM) PADA BADGE & TOMBOL */
+/* ========================================== */
+.shiny-badge {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(26, 26, 26, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #e5e5e5;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 0;
+}
+
+.shiny-badge > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ========================================== */
+/* LINK CARD (KARTU CHANNEL)                  */
+/* ========================================== */
+.link-card {
+  background-color: rgba(26, 26, 26, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.link-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(40, 40, 40, 0.6);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.link-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ffffff, #6b6b6b);
+}
+
+.link-card .icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* ========================================== */
+/* ANIMASI BUBBLE PIXEL ART                    */
+/* ========================================== */
+@keyframes float-bubble {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); }
+  25%  { transform: translateY(-4px) rotate(3deg) scale(1.02); }
+  50%  { transform: translateY(-6px) rotate(5deg) scale(1.05); }
+  75%  { transform: translateY(-3px) rotate(2deg) scale(1.02); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+.animate-float-bubble {
+  animation: float-bubble 2s infinite ease-in-out;
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.4));
+}
+
+/* ========================================== */
+/* ANIMASI FADE-IN-UP SAAT LOAD                */
+/* ========================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* ========================================== */
+/* EFEK MENGETIK (TYPEWRITER)                  */
+/* ========================================== */
+.typewriter-cursor::after {
+  content: '|';
+  animation: blink 0.7s infinite;
+  color: white;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ========================================== */
+/* BLACK GRADIENT THEME                        */
+/* ========================================== */
+html, body {
+  min-height: 100%;
+  background: linear-gradient(180deg, #000000 0%, #080808 45%, #111111 100%) !important;
+  color: #f5f5f5;
+}
+
+body {
+  background-attachment: fixed !important;
+}
+
+.dark body,
+body.dark {
+  background: linear-gradient(180deg, #000000 0%, #080808 45%, #111111 100%) !important;
+  color: #f5f5f5;
+}
+
+/* ========================================== */
+/* GLASSMORPHISM UNTUK BOTTOM PLAYER           */
+/* ========================================== */
+.spotify-glass {
+  background: rgba(24, 24, 24, 0.85) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
